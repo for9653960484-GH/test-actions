@@ -14,3 +14,15 @@ def read_root() -> dict:
 def get_server_time() -> dict:
     now = datetime.now(timezone.utc)
     return {"server_time": now.isoformat()}
+
+
+@app.get("/date")
+def get_server_date() -> dict:
+    today = datetime.now().date()
+    return {"date": today.isoformat()}
+
+
+@app.get("/date/utc")
+def get_server_date_utc() -> dict:
+    today_utc = datetime.now(timezone.utc).date()
+    return {"date_utc": today_utc.isoformat()}
