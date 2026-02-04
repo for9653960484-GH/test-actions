@@ -1,0 +1,32 @@
+Проект: Time API (FastAPI)
+
+Описание
+Простой API, который возвращает состояние сервера, текущую дату и время.
+
+Эндпоинты
+- GET /            -> {"status": "ok", "message": "Use /time to get server time"}
+- GET /time        -> {"server_time": "<ISO-8601 UTC>"}
+- GET /date        -> {"date": "YYYY-MM-DD"} (локальная дата сервера)
+- GET /date/utc    -> {"date_utc": "YYYY-MM-DD"} (UTC-дата)
+
+Локальный запуск (Windows, PowerShell)
+1) Создать виртуальное окружение:
+   python -m venv .venv
+2) Активировать окружение:
+   .\.venv\Scripts\Activate.ps1
+3) Установить зависимости:
+   python -m pip install -r requirements.txt
+4) Запустить сервер:
+   python -m uvicorn main:app --reload
+
+Docker
+1) Сборка:
+   docker build -t time-api .
+2) Запуск:
+   docker run -p 8000:8000 time-api
+
+GitHub Actions (CI/CD)
+Workflow: .github/workflows/deploy.yml
+Секреты, необходимые для деплоя:
+- SSH_HOST, SSH_USER, SSH_KEY, SSH_PORT
+- GHCR_USERNAME, GHCR_PAT (PAT с read:packages)
